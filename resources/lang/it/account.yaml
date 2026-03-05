@@ -1,0 +1,18 @@
+login:
+  motto: La tua casa, ovunque tu sia
+  username: Nome utente
+  password: Password
+  fakehandle: Abigail
+  fakehandle2: Johnathan
+  fakehandle3: Samantha
+  fakehandle4: Michael
+  fakehandle5: Jessica
+  forgotpassword: Password dimenticata?
+  login: Accedi
+  success: Accesso riuscito
+  error: Nome utente o password non validi
+register:
+  signup: Registrati
+profile:
+  pagename: Profilo
+  edit: Modifica

@@ -1,0 +1,18 @@
+login:
+  motto: Your home, anywhere you are
+  username: Username
+  password: Password
+  fakehandle1: Abigail
+  fakehandle2: Johnathan
+  fakehandle3: Samantha
+  fakehandle4: Michael
+  fakehandle5: Jessica
+  forgotpassword: Forgot password?
+  login: Log in
+  success: Login successful
+  error: Invalid username or password
+register:
+  signup: Sign up
+profile:
+  pagename: Profile
+  edit: Edit
