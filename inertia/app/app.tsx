@@ -1,13 +1,15 @@
 /// <reference path="../../adonisrc.ts" />
 /// <reference path="../../config/inertia.ts" />
 
-import '../css/app.css'
+import '../styles/app.css'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
 import { createInertiaApp } from '@inertiajs/react'
+import { Layout } from 'antd'
+import { Content } from 'antd/es/layout/layout'
 import { createRoot } from 'react-dom/client'
-import '@ant-design/v5-patch-for-react-19'
+import ThemeWrapper from '~/components/theme-wrapper'
 
-const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
+const appName = import.meta.env.VITE_APP_NAME || 'HomeBase'
 
 createInertiaApp({
 	progress: { color: '#5468FF' },
@@ -22,6 +24,19 @@ createInertiaApp({
 	},
 
 	setup({ el, App, props }) {
-		createRoot(el).render(<App {...props} />)
+		createRoot(el).render(
+			<ThemeWrapper>
+				<Layout>
+					<Content
+						style={{
+							height: '100vh',
+							overflow: 'hidden',
+						}}
+					>
+						<App {...props} />
+					</Content>
+				</Layout>
+			</ThemeWrapper>,
+		)
 	},
 })
