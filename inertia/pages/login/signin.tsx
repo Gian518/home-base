@@ -1,0 +1,96 @@
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { Head, router, useForm } from '@inertiajs/react'
+import { Button, Input, message, Typography } from 'antd'
+import { login } from '~/api/UsersController'
+import styles from '~/styles'
+import useI18n from '~/utility/i18n'
+import snacks from '~/utility/snacks'
+
+const Signin = () => {
+	/* HOOKS */
+	const { t } = useI18n()
+	const { data, setData } = useForm({
+		username: '',
+		password: '',
+	})
+	const [messageApi, contextHolder] = message.useMessage()
+	const { fakeHandleRandomizer } = snacks()
+
+	/* STYLES */
+	const {
+		icon,
+		input,
+		forgotPassword,
+		loginButton,
+	} = styles.login()
+
+	/**
+	 * Handles the login process by sending the username and password
+	 */
+	const handleLogin = async () => {
+		try {
+			const response = await login(data)
+			if (response?.success) {
+				router.visit('/', { data: { login: true } })
+			} else {
+				messageApi.open({
+					type: 'error',
+					content: t('account.login.error'),
+				})
+				console.error('Login failed:', response?.message)
+			}
+		} catch (error) {
+			console.error('Error during login:', error)
+		}
+	}
+
+	return (
+		<>
+			{contextHolder}
+			<Head title='Login' />
+
+			{/* Username */}
+			<Typography.Text>
+				{t('account.login.username')}
+			</Typography.Text>
+			<Input
+				placeholder={fakeHandleRandomizer()}
+				variant='filled'
+				style={input}
+				prefix={<UserOutlined style={icon} height={'17px'} />}
+				onChange={e => setData('username', e.target.value)}
+			/>
+
+			{/* Password */}
+			<Typography.Text style={{ marginTop: 16 }}>
+				{t('account.login.password')}
+			</Typography.Text>
+			<Input.Password
+				placeholder='••••••••'
+				variant='filled'
+				style={input}
+				prefix={<LockOutlined style={icon} height={'17px'} />}
+				onChange={e => setData('password', e.target.value)}
+				onPressEnter={handleLogin}
+			/>
+
+			{/* Forgot password */}
+			<Button type='link' style={forgotPassword}>
+				{t('account.login.forgotpassword')}
+			</Button>
+
+			{/* Login */}
+			<Button
+				type='primary'
+				size='large'
+				style={loginButton}
+				onClick={handleLogin}
+				disabled={!data.username || !data.password}
+			>
+				{t('account.login.login')}
+			</Button>
+		</>
+	)
+}
+
+export default Signin

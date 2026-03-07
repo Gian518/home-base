@@ -29,6 +29,8 @@ const BASE_INPUT_STYLES: NonNullable<ThemeConfig['components']>['Input'] = {
 	fontSize: 14,
 	colorFillSecondary: '#FFFFFF44',
 	colorFillTertiary: '#FFFFFF33',
+	colorErrorBg: '#531a1a8d',
+	colorErrorBgHover: '#FFFFFF33',
 }
 
 export const THEME_COLORS: {
@@ -61,6 +63,7 @@ export const THEME_COLORS: {
 			colorTextPlaceholder: '#64748B',
 			colorBorder: '#333333',
 			colorBgContainer: '#1A1A1A',
+			colorErrorText: '#b80d10',
 		},
 		components: {
 			Button: {
@@ -74,6 +77,8 @@ export const THEME_COLORS: {
 				...BASE_INPUT_STYLES,
 				colorFillSecondary: '#00000044',
 				colorFillTertiary: '#00000033',
+				colorErrorBgHover: '#00000033',
+				colorErrorBg: '#410a0a3a',
 			},
 		},
 	},

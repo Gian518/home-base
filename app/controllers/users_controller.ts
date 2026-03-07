@@ -7,11 +7,15 @@ export default class UsersController {
 	 * Create a new user
 	 */
 	async register({ request, auth }: HttpContext) {
-		const data = request.only(['fullName', 'email', 'username', 'password'])
-		const payload = await createUserValidator.validate(data)
+		const payload = await request.validateUsing(createUserValidator)
 
 		try {
-			const userCreated = await User.create(payload)
+			const userCreated = await User.create({
+				fullName: payload.fullName,
+				email: payload.email,
+				username: payload.username,
+				password: payload.password,
+			})
 			const user = await User.verifyCredentials(payload.username, payload.password)
 			if (userCreated && user) {
 				await auth.use('web').login(user)

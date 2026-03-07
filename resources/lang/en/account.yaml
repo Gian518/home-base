@@ -13,6 +13,13 @@ login:
   error: Invalid username or password
 register:
   signup: Sign up
+  fullname: Full Name
+  fullnameplaceholder: John Doe
+  email: E-Mail Address
+  emailplaceholder: my@example.org
+  confirmpassword: Confirm Password
+  success: Registration successful
+  error: Registration failed. Please try again.
 profile:
   pagename: Profile
   edit: Edit

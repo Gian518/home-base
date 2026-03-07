@@ -1,0 +1,16 @@
+shared:
+  messages:
+    username:
+      required: Il nome utente è obbligatorio
+      maxLength: Il nome utente non può essere più lungo di 50 caratteri
+      database:
+        unique: Questo nome utente è già stato usato
+    email:
+      required: Il campo email è obbligatorio
+      database:
+        unique: Questo indirizzo E-Mail è già stato usato
+    password:
+      minLength: La password deve includere almeno 8 caratteri
+    confirmPassword:
+      minLength: La password deve includere almeno 8 caratteri
+      sameAs: Le password non corrispondono

@@ -1,0 +1,16 @@
+shared:
+  messages:
+    username:
+      required: Username is required
+      maxLength: The username cannot be longer than 50 characters
+      database:
+        unique: This username has already been taken
+    email:
+      required: The E-Mail field is required
+      database:
+        unique: This E-Mail address has already been taken
+    password:
+      minLength: Password must have at least 8 characters
+    confirmPassword:
+      minLength: Password must have at least 8 characters
+      sameAs: Passwords don't match

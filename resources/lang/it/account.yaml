@@ -13,6 +13,13 @@ login:
   error: Nome utente o password non validi
 register:
   signup: Registrati
+  fullname: Nome completo
+  fullnameplaceholder: Mario Rossi
+  email: Indirizzo E-Mail
+  emailplaceholder: mio@esempio.org
+  confirmpassword: Conferma Password
+  success: Registrazione riuscita
+  error: Registrazione fallita. Per favore riprova.
 profile:
   pagename: Profilo
   edit: Modifica
