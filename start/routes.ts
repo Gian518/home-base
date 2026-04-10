@@ -12,11 +12,11 @@ import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 
 /* Unauthenticated routes */
-router.on('/login').renderInertia('login/index').use(middleware.guest())
+router.on('/login').renderInertia('login/index', {}).use(middleware.guest())
 
 /* Authenticated routes */
-router.on('/').renderInertia('home').use(middleware.auth())
-router.on('/account').renderInertia('account').use(middleware.auth())
+router.on('/').renderInertia('home', {}).use(middleware.auth())
+router.on('/account').renderInertia('account', {}).use(middleware.auth())
 
 router.group(() => {
 	router.group(() => {
