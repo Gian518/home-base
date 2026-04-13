@@ -36,7 +36,7 @@ const common = () => {
 		// Avatar
 		defaultAvatar: css({
 			backgroundColor: token.colorBgBase,
-			border: `2px solid ${token.colorPrimary}`,
+			border: `1px solid ${token.colorPrimary}`,
 		}),
 		defaultIcon: css({
 			color: token.colorPrimary,

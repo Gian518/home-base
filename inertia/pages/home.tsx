@@ -1,5 +1,5 @@
 import { UserOutlined } from '@ant-design/icons'
-import { Head, Link } from '@inertiajs/react'
+import { Head, Link, router } from '@inertiajs/react'
 import { Avatar, Col, Flex, message, Row, Typography } from 'antd'
 import { DateTime } from 'luxon'
 import { useEffect } from 'react'
@@ -34,6 +34,8 @@ export const Home: RC = ({ user }) => {
 			})
 			sessionStorage.removeItem('register')
 		}
+
+		router.reload()
 	}, [])
 
 	const getWelcomeText = () => {
@@ -66,6 +68,7 @@ export const Home: RC = ({ user }) => {
 						<Link href='/account'>
 							<Avatar
 								size={40}
+								src={user.avatar?.url}
 								icon={<UserOutlined style={hs.icon} />}
 								style={cs.defaultAvatar}
 							/>
