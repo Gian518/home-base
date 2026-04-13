@@ -32,3 +32,6 @@ profile:
   passwordchanged: La password è stata aggiornata
   invalidpassword: La password attuale non è corretta
   logout: Esci
+  avatarupdated: Avatar aggiornato
+  avatardeleted: Avatar eliminato
+  deleteavatar: Elimina avatar

@@ -27,13 +27,28 @@ const account = () => {
 		}),
 		avatar: css({
 			marginTop: 32,
-			padding: 3,
 			backgroundColor: token.colorBgBase,
 			border: `2px solid ${token.colorPrimary}`,
+			cursor: 'pointer',
 		}),
 		icon: css({
 			color: token.colorPrimary,
 			backgroundColor: token.colorBgBase,
+		}),
+		editDot: vss({
+			position: 'absolute',
+			top: 105,
+			right: 0,
+			width: 30,
+			height: 30,
+			backgroundColor: token.colorBgBase,
+			cursor: 'pointer',
+		}, {
+			border: {
+				true: {
+					border: `1px solid ${token.colorPrimary}`,
+				},
+			},
 		}),
 		fullName: css({
 			marginTop: 16,

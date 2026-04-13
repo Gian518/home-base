@@ -38,3 +38,12 @@ export const passwordChangeValidator = vine.withMetaData<{ id: number }>().compi
 		confirmPassword: vine.string().minLength(8).sameAs('newPassword'),
 	}),
 )
+
+export const avatarValidator = vine.compile(
+	vine.object({
+		avatar: vine.file({
+			size: '5mb',
+			extnames: ['jpg', 'jpeg', 'png', 'gif', 'tiff'],
+		}).nullable(),
+	}),
+)

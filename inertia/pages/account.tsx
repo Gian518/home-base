@@ -1,17 +1,20 @@
 import User from '#models/user'
 import {
+	DeleteOutlined,
+	EditOutlined,
 	IdcardOutlined,
 	LeftOutlined,
 	LockOutlined,
 	LogoutOutlined,
 	MailOutlined,
+	PlusOutlined,
 	UserOutlined,
 } from '@ant-design/icons'
 import { Head, router, useForm } from '@inertiajs/react'
 import { Avatar, Button, Col, Flex, Input, message, Row, Typography } from 'antd'
 import { useEffect, useState } from 'react'
 import OneSignal from 'react-onesignal'
-import { changePassword, changePersonalData, logout } from '~/api'
+import { changeAvatar, changePassword, changePersonalData, logout } from '~/api'
 import GlassCard from '~/components/glass-card'
 import OneSignalAlert from '~/components/onesignal-alert'
 import styles from '~/styles'
@@ -148,7 +151,30 @@ export const Account = ({ user }: IProps) => {
 				throw response.message
 			}
 		} catch (error) {
-			messageApi.error(t('generic.genericerror'))
+			messageApi.error(t('generic.genericerror'), 500)
+			console.error('Error in Account component:', error)
+		}
+	}
+
+	/**
+	 * [API] Change avatar
+	 * @param file The avatar file to upload. If null, the avatar will be deleted.
+	 */
+	const handleChangeAvatar = async (file: File | null) => {
+		try {
+			const response = await changeAvatar(file)
+			if (response.success) {
+				if (response.action === 'updated') {
+					messageApi.success(t('account.profile.avatarupdated'))
+				} else if (response.action === 'deleted') {
+					messageApi.success(t('account.profile.avatardeleted'))
+				}
+				router.reload()
+			} else {
+				throw response.errors?.[0].message
+			}
+		} catch (error) {
+			messageApi.error(t(error ?? 'generic.genericerror'))
 			console.error('Error in Account component:', error)
 		}
 	}
@@ -184,8 +210,49 @@ export const Account = ({ user }: IProps) => {
 
 					{/* Avatar */}
 					<Flex justify='center' align='center' vertical>
-						{/* Propic */}
-						<Avatar size={102} icon={<UserOutlined style={as.icon} />} style={as.avatar} />
+						{/* Hidden input */}
+						<input
+							type='file'
+							accept='image/*'
+							hidden
+							id='avatar-upload'
+							multiple={false}
+							onChange={e => {
+								if (e.target.files && e.target.files[0]) {
+									handleChangeAvatar(e.target.files[0])
+								}
+							}}
+						/>
+						<div style={css({ position: 'relative' })}>
+							{/* Propic */}
+							<Avatar
+								size={102}
+								icon={<UserOutlined style={as.icon} />}
+								style={as.avatar}
+								src={user.avatar?.url}
+								onClick={() => document.getElementById('avatar-upload')?.click()}
+							/>
+							{/* Edit dot */}
+							<Avatar
+								size={40}
+								icon={!user.avatar?.url ? <PlusOutlined style={as.icon} /> : <EditOutlined style={as.icon} />}
+								style={as.editDot({ ...(!user.avatar?.url && { border: 'true' }) })}
+								onClick={() => document.getElementById('avatar-upload')?.click()}
+							/>
+						</div>
+						{
+							// Delete avatar button
+							isEditing && user.avatar?.url
+							&& (
+								<Button
+									style={cx(cs.mt16, bs.ghosted, bs.danger)}
+									icon={<DeleteOutlined />}
+									onClick={() => handleChangeAvatar(null)}
+								>
+									{t('account.profile.deleteavatar')}
+								</Button>
+							)
+						}
 						{/* Name */}
 						<Typography.Title level={2} style={as.fullName}>{user.fullName}</Typography.Title>
 						{/* Username */}

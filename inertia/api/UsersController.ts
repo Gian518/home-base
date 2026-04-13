@@ -55,3 +55,19 @@ export const changePassword: TChangePassword = async (data) => {
 		return apiError(error)
 	}
 }
+
+export const changeAvatar = async (file: File | null) => {
+	try {
+		const formData = new FormData()
+		formData.append('avatar', file ?? '')
+
+		const res = await axios.post('/api/change-avatar', formData, {
+			withCredentials: true,
+			headers: { 'Content-Type': 'multipart/form-data' },
+		})
+		return res.data
+	} catch (error) {
+		console.error('Error in UsersController.changeAvatar:', error)
+		return apiError(error)
+	}
+}

@@ -1,6 +1,7 @@
 import User from '#models/user'
-import { createUserValidator, passwordChangeValidator, personalDataValidator } from '#validators/user'
+import { avatarValidator, createUserValidator, passwordChangeValidator, personalDataValidator } from '#validators/user'
 import type { HttpContext } from '@adonisjs/core/http'
+import { attachmentManager } from '@jrmc/adonis-attachment'
 
 export default class UsersController {
 	/**
@@ -104,6 +105,42 @@ export default class UsersController {
 			response.status(200).send({ success: true })
 		} catch (error) {
 			response.status(403).send({ error: true, message: error.code })
+		}
+	}
+
+	async changeAvatar({ request, response, auth }: HttpContext) {
+		if (!auth.user) {
+			throw 'Invalid user'
+		}
+
+		await request.validateUsing(avatarValidator)
+
+		const avatar = request.file('avatar', {
+			size: '5mb',
+			extnames: ['jpg', 'jpeg', 'png', 'gif', 'tiff'],
+		})
+
+		try {
+			const user = auth.user
+			if (!user) {
+				throw 'Invalid user'
+			}
+
+			if (!avatar) {
+				await user.avatar?.remove()
+				user.avatar = null
+				await user.save()
+				response.status(200).send({ success: true, action: 'deleted' })
+				return
+			}
+
+			await user.avatar?.remove()
+
+			user.avatar = await attachmentManager.createFromFile(avatar)
+			await user.save()
+			response.status(200).send({ success: true, action: 'updated' })
+		} catch (error) {
+			response.status(500).send({ error: true, message: error.code })
 		}
 	}
 }
