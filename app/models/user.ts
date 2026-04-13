@@ -2,6 +2,8 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { compose } from '@adonisjs/core/helpers'
 import hash from '@adonisjs/core/services/hash'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { attachment } from '@jrmc/adonis-attachment'
+import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import { DateTime } from 'luxon'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
@@ -21,6 +23,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
 	@column()
 	declare username: string
+
+	@attachment({ preComputeUrl: true })
+	declare avatar: Attachment | null
 
 	@column({ serializeAs: null })
 	declare password: string

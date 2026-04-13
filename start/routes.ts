@@ -28,5 +28,6 @@ router.group(() => {
 		router.post('/logout', new UsersController().logout)
 		router.post('/change-personal-data', new UsersController().changePersonalData)
 		router.post('/change-password', new UsersController().changePassword)
+		router.post('/change-avatar', new UsersController().changeAvatar)
 	}).use(middleware.auth())
 }).prefix('/api')

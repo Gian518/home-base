@@ -18,3 +18,7 @@ shared:
     confirmPassword:
       minLength: Password must have at least 8 characters
       sameAs: Passwords don't match
+    avatar:
+      file:
+        extname: "The avatar must be a file of type: jpg, jpeg, png, gif, tiff"
+        size: The avatar must be smaller than 5MB
