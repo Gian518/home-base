@@ -10,6 +10,10 @@ const common = () => {
 			display: 'flex',
 			flexDirection: 'column',
 		}),
+		rowFlex: css({
+			display: 'flex',
+			flexDirection: 'row',
+		}),
 
 		// Width/Height
 		w100: css({

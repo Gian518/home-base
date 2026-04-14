@@ -3,6 +3,9 @@ import { Head, Link, router } from '@inertiajs/react'
 import { Avatar, Col, Flex, message, Row, Typography } from 'antd'
 import { DateTime } from 'luxon'
 import { useEffect } from 'react'
+import barcodeDot from '~/assets/barcode-dot.svg'
+import quickActions from '~/assets/quick-actions.svg'
+import GlassCard from '~/components/glass-card'
 import OneSignalAlert from '~/components/onesignal-alert'
 import { RC } from '~/models/components'
 import styles from '~/styles'
@@ -77,6 +80,20 @@ export const Home: RC = ({ user }) => {
 
 					{/* OneSignal alert */}
 					<OneSignalAlert style={hs.notificationAlert} />
+
+					{/* Quick actions */}
+					<Flex align='center' style={cs.mt32}>
+						<img src={quickActions} alt='Quick Actions' />
+						<Typography.Title level={4} style={hs.quickActionsTitle}>
+							{t('home.quickactions')}
+						</Typography.Title>
+					</Flex>
+					<GlassCard innerStyle={hs.barcodeButton} onClick={() => router.visit('/scan')}>
+						<img src={barcodeDot} alt='Scan Barcode' />
+						<Typography.Title level={5}>
+							{t('home.scanitem')}
+						</Typography.Title>
+					</GlassCard>
 				</Col>
 			</Row>
 		</>

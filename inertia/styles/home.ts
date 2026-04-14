@@ -28,6 +28,19 @@ const home = () => {
 		notificationAlert: css({
 			marginTop: 10,
 		}),
+		quickActionsTitle: css({
+			marginBottom: 0,
+			marginLeft: 8,
+		}),
+		barcodeButton: css({
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			marginTop: 16,
+			gap: 8,
+			border: `1px solid ${token.colorBorderSecondary}`,
+			backgroundColor: token.colorBgMask,
+		}),
 	}
 }
 

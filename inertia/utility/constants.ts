@@ -3,6 +3,7 @@ import { ThemeConfig } from 'antd'
 const BASE_TOKENS: NonNullable<ThemeConfig['token']> = {
 	fontFamily: 'Inter, sans-serif',
 	colorPrimary: '#13EC5B',
+	colorBorderSecondary: '#13ec5bac',
 	colorBgBase: '#E8FCEC',
 	colorBgLayout: 'transparent',
 	colorBgBlur: '#FFFFFF3C',
@@ -12,6 +13,11 @@ const BASE_TOKENS: NonNullable<ThemeConfig['token']> = {
 	colorTextPlaceholder: '#7d7d7d',
 	colorBorder: '#FFFFFF05',
 	colorBgContainer: '#FFFFFF',
+	colorBgMask: '#13ec5ba0',
+}
+
+const BASE_TYPOGRAPHY_STYLES: NonNullable<ThemeConfig['components']>['Typography'] = {
+	titleMarginBottom: 0,
 }
 
 const BASE_BUTTON_STYLES: NonNullable<ThemeConfig['components']>['Button'] = {
@@ -49,12 +55,16 @@ export const THEME_COLORS: {
 			Input: {
 				...BASE_INPUT_STYLES,
 			},
+			Typography: {
+				...BASE_TYPOGRAPHY_STYLES,
+			},
 		},
 	},
 	dark: {
 		token: {
 			...BASE_TOKENS,
 			colorPrimary: '#13EC5B',
+			colorBorderSecondary: '#13ec5b57',
 			colorBgBase: '#162B18',
 			colorBgLayout: 'transparent',
 			colorBgBlur: '#FFFFFF0D',
@@ -69,6 +79,7 @@ export const THEME_COLORS: {
 			colorInfoBg: '#112B2B99',
 			colorErrorBg: '#2B1111CC',
 			colorSuccessBg: '#112B21CC',
+			colorBgMask: '#13ec5b26',
 		},
 		components: {
 			Button: {
@@ -85,6 +96,9 @@ export const THEME_COLORS: {
 				colorErrorBgHover: '#00000033',
 				colorErrorBg: '#410a0a3a',
 				colorBgContainerDisabled: '#FFFFFF11',
+			},
+			Typography: {
+				...BASE_TYPOGRAPHY_STYLES,
 			},
 		},
 	},
