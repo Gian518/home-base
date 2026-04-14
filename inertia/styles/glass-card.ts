@@ -7,6 +7,7 @@ const glassCard = () => {
 
 	return {
 		innerContainer: css({
+			width: '100%',
 			backdropFilter: 'blur(10px)',
 			backgroundColor: token.colorBgBlur,
 			border: '1px solid rgba(255, 255, 255, 0.1)',

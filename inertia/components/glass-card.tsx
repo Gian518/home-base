@@ -8,18 +8,29 @@ interface IGlassCard {
 	children: React.ReactNode
 	containerStyle?: React.CSSProperties
 	innerStyle?: React.CSSProperties
+	onClick?: () => void
 }
 
-const GlassCard: React.FC<IGlassCard> = ({ title, children, containerStyle, innerStyle }) => {
+const GlassCard: React.FC<IGlassCard> = ({ title, children, containerStyle, innerStyle, onClick }) => {
 	/* STYLES */
 	const gs = styles.glassCard()
 
+	const Tag = onClick ? 'button' : 'div'
+
 	return (
-		<div style={containerStyle}>
+		<div
+			style={containerStyle}
+		>
 			{title && <Typography.Title style={gs.heading}>{title}</Typography.Title>}
-			<div style={cx(gs.innerContainer, innerStyle)}>
+			<Tag
+				style={cx(gs.innerContainer, innerStyle)}
+				{...(onClick && {
+					onClick: onClick,
+					type: 'button',
+				})}
+			>
 				{children}
-			</div>
+			</Tag>
 		</div>
 	)
 }
