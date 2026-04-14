@@ -174,7 +174,7 @@ export const Account = ({ user }: IProps) => {
 				throw response.errors?.[0].message
 			}
 		} catch (error) {
-			messageApi.error(t(error ?? 'generic.genericerror'))
+			messageApi.error(t(error as string ?? 'generic.genericerror'))
 			console.error('Error in Account component:', error)
 		}
 	}
