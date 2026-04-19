@@ -19,5 +19,6 @@ declare module '@adonisjs/inertia/types' {
     'login/index': ExtractProps<(typeof import('../../inertia/pages/login/index.tsx'))['default']>
     'login/register': ExtractProps<(typeof import('../../inertia/pages/login/register.tsx'))['default']>
     'login/signin': ExtractProps<(typeof import('../../inertia/pages/login/signin.tsx'))['default']>
+    'scan': ExtractProps<(typeof import('../../inertia/pages/scan.tsx'))['default']>
   }
 }
